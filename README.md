@@ -12,3 +12,6 @@ This app uses Postgresql 12.3 to store data.
 
 * https://github.com/doug-martin/goqu
 
+#### things to refer to:
+
+* ORMs - https://gorm.io/
