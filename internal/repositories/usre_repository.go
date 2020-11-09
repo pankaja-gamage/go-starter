@@ -1,7 +1,7 @@
 package repositories
 
 import (
-	"database/sql"
+	"go-starter/internal/common/data"
 	"go-starter/internal/models"
 	"log"
 	"time"
@@ -9,13 +9,12 @@ import (
 	uuid "github.com/satori/go.uuid"
 )
 
-func NewUserRepository(db *sql.DB) *UserRepository {
-	return &UserRepository{db}
+func NewUserRepository() *UserRepository {
+	return &UserRepository{}
 }
 
 //UserRepository structure
 type UserRepository struct {
-	DbConn *sql.DB
 }
 
 func (repo UserRepository) InsertUser(user models.AddUserRequest, id uuid.UUID) (int64, error) {
@@ -23,7 +22,7 @@ func (repo UserRepository) InsertUser(user models.AddUserRequest, id uuid.UUID) 
 
 	var now = time.Now().UTC().Truncate(time.Millisecond)
 
-	if tx, txErr := repo.DbConn.Begin(); txErr == nil {
+	if tx, txErr := data.DbConn.Begin(); txErr == nil {
 		stmt, err := tx.Prepare(query)
 		if err != nil {
 			log.Println(err)

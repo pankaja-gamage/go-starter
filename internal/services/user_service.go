@@ -2,7 +2,6 @@ package services
 
 import (
 	"go-starter/internal/common/apihelpers"
-	"go-starter/internal/common/data"
 	"go-starter/internal/models"
 	"go-starter/internal/repositories"
 	"log"
@@ -10,7 +9,7 @@ import (
 	uuid "github.com/satori/go.uuid"
 )
 
-var userRepository = repositories.NewUserRepository(data.DbConn)
+var userRepository = repositories.NewUserRepository()
 
 func AddUser(user models.AddUserRequest) apihelpers.CreationResponse {
 	log.Printf("received user - %v\n", user)
